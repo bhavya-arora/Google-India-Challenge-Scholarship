@@ -17,7 +17,9 @@ package com.example.android.background.sync;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.example.android.background.MainActivity;
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.Driver;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -45,6 +47,8 @@ public class ReminderUtilities {
 
         if (sInitialized) return;
 
+        Log.i(MainActivity.TAG, "scheduleChargingReminder: " + sInitialized);
+
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
 
@@ -65,7 +69,10 @@ public class ReminderUtilities {
                  * as different users may have different preferences on when you should be
                  * syncing your application's data.
                  */
-                .setConstraints(Constraint.DEVICE_CHARGING)
+
+                //.setConstraints(Constraint.DEVICE_CHARGING)
+                .setConstraints(Constraint.ON_UNMETERED_NETWORK)
+
                 /*
                  * setLifetime sets how long this job should persist. The options are to keep the
                  * Job "forever" or to have it die the next time the device boots up.

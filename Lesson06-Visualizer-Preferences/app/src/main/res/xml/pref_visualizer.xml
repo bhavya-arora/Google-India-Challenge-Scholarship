@@ -2,6 +2,17 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--As shown in the Preview this checkbox summary is Shown, but how preview figured that summary
+    will be shown, because in every child preference under PreferenceScreen
+    has summary attribute and all summary will be set according to which preference we are
+    setting the Summary and as we are seeing the CheckboxPreference and in this Preference
+    we can only show 2 types of summary either shown and hidden(summaryon and summaryOff respectively)
+    so that's why we provide summaryOff and summaryOn strings, so that checkboxPreference can
+    figured it out that when checkbox is on(means checked or means true) then this
+    checkboxpreference will set the summary summaryOn because checkbox is on or we can say checkbox has value true.
+
+    NOTE: every Preference in this PreferenceScreen has their own
+    key and corresponding value.-->
     <CheckBoxPreference
         android:defaultValue="@bool/pref_show_bass_default"
         android:key="@string/pref_show_bass_key"
@@ -9,6 +20,12 @@
         android:summaryOn="@string/pref_show_true"
         android:title="@string/pref_show_bass_label" />
 
+    <!--Same with this one if this checkboxprefernce has value true then it will
+    set the summaryOn and if this checkbox preference has value false it will automatically set the
+    summaryOff. it's like:
+           true ======> summaryOn
+           false ======> summaryOff
+           -->
     <CheckBoxPreference
         android:defaultValue="@bool/pref_show_mid_range_default"
         android:key="@string/pref_show_mid_range_key"
@@ -23,11 +40,22 @@
         android:summaryOn="@string/pref_show_true"
         android:title="@string/pref_show_treble_label" />
 
+    <!--this EditTextPreference is like a EditText in which we can store or add any string value
+    by default we put 1 because it's a multiplier preference and we want a int value
+    to work on but we can store any value as a string. so make sure to validate the values before storing into
+    sharedPreferences. The value we put into this EditText this will be stored immediately into the
+    SharedPrefeence file with the key "@string/pref_size_key".
+    so that's why sharedPreference Fragment makes our life much more
+    easier because all the saving and reading work is not done by us. it's all taken care by
+    PreferenceFragment.-->
     <EditTextPreference
         android:defaultValue="@string/pref_size_default"
         android:key="@string/pref_size_key"
         android:title="@string/pref_size_label" />
 
+    <!--This is something different apart from key and value(because key value is always be present in every Preference)
+    so apart from key value it has entries(Labels) and entries values corresponding to each label.
+    that's why we are giving the Array of Values and Labels. and only one entry value will be present at a time.-->
     <ListPreference
         android:defaultValue="@string/pref_color_red_value"
         android:entries="@array/pref_color_option_labels"
